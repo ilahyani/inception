@@ -19,7 +19,7 @@ https://medium.com/@saschagrunert/demystifying-containers-part-iii-container-ima
 
 Understand Namespaces: http://ifeanyi.co/
 
-Docker networkin: https://www.youtube.com/watch?v=bKFMS5C4CG0&start=935
+Docker networking: https://www.youtube.com/watch?v=bKFMS5C4CG0&start=935
 ### Getting started
 
 https://docs.docker.com/get-started/
