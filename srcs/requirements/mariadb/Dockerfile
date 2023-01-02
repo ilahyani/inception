@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:bullseye
 
 RUN apt-get update
 
@@ -8,6 +8,6 @@ COPY tools/run.sh /tmp/run.sh
 
 RUN chmod +x /tmp/run.sh
 
-RUN /bin/bash /tmp/run.sh
+ENTRYPOINT ["bash" , "/tmp/run.sh"]
 
-ENTRYPOINT ["mysqld_safe"]
+
