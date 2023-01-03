@@ -10,16 +10,14 @@ chmod +x /usr/local/bin/wp
 
 mkdir -p var/www/html
 
-cd /var/www/html/
+wp core download --allow-root --path=/var/www/html
 
-wp core download --allow-root
-
-wp core config --dbname=${DATABASE} --dbuser=${USER} --dbpass=${USER_PASSWD} --dbhost=${WORDPRESS_DB_HOST} --allow-root --skip-check
+wp core config --dbname=${DATABASE} --dbuser=${USER} --dbpass=${USER_PASSWD} --dbhost=${WORDPRESS_DB_HOST} --allow-root --path=/var/www/html --skip-check
 
 wp core install --url=${DOMAIN_NAME} --title=${WP_TITLE} --admin_user=${WP_ADMIN} --admin_password=${WP_ADMIN_PWD} --admin_email=${WP_ADMIN_EMAIL} \
-    --skip-email --allow-root --path=var/www/html --allow-root
+    --skip-email --allow-root --path=/var/www/html
 
-wp user create ${WP_USER} ${WP_EMAIL} --role=author --user_pass=${WP_USER_PWD} --allow-root
+wp user create ${WP_USER} ${WP_EMAIL} --role=author --user_pass=${WP_USER_PWD} --allow-root --path=/var/www/html
 
 mkdir /run/php
 
