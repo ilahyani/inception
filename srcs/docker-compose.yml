@@ -38,6 +38,17 @@ services:
         depends_on:
           - wordpress
         restart: on-failure
+    website:
+        build: ./requirements/bonus/website
+        image: website
+        container_name: website
+        volumes:
+          - web-data:/var/www/html
+        ports:
+          - 8080:8080
+        networks:
+          - inception
+        restart: on-failure     
 
 volumes:
     mdb_data:
@@ -52,6 +63,12 @@ volumes:
         type: none
         o: bind
         device: /Users/ilahyani/data/wordpress
+    web-data:
+      driver: local
+      driver_opts:
+        type: none
+        o: bind
+        device: /Users/ilahyani/inception/srcs/requirements/bonus/website/webfiles
 
 networks:
     inception:
