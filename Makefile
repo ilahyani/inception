@@ -13,6 +13,6 @@ clean: down
 	@docker ps -aq | xargs docker rm
 	@docker images -aq | xargs docker rmi
 
-fclean:
+fclean: clean
 	@docker volume prune -f
 	@docker system prune -af
