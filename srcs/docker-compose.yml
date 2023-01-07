@@ -48,7 +48,18 @@ services:
           - 8080:8080
         networks:
           - inception
-        restart: on-failure     
+        restart: on-failure
+    adminer:
+        build: ./requirements/bonus/adminer
+        image: adminer
+        container_name: adminer
+        ports:
+          - 5001:5001
+        depends_on:
+          - mariadb
+        networks:
+          - inception
+        restart: on-failure
 
 volumes:
     mdb_data:

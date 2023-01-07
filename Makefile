@@ -10,7 +10,7 @@ down:
 	@docker-compose -f ./srcs/docker-compose.yml down
 
 clean: down
-	@docker ps -aq | xargs docker rm
+	@docker ps -aq | xargs docker rm -f
 	@docker images -aq | xargs docker rmi
 
 fclean: clean
