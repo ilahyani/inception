@@ -12,11 +12,12 @@ down:
 clean: down
 	@docker ps -aq | xargs docker rm -f
 	@docker images -aq | xargs docker rmi
+	@docker volume ls -q | xargs docker volume rm
+	@sudo rm -rf /Users/ilahyani/inception/srcs/volumes/wordpress/*
+	@sudo rm -rf /Users/ilahyani/inception/srcs/volumes/mariadb/*
 
 fclean: clean
 	@docker volume prune -f
 	@docker system prune -af
-	@rm -rf /Users/ilahyani/data/wordpress/*
-	@rm -rf /Users/ilahyani/data/mariadb/*
 
 re: fclean all

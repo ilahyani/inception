@@ -20,6 +20,8 @@ services:
         env_file: .env
         depends_on:
           - mariadb
+          # - ftp
+          - redis
         networks:
           - inception
         ports:
@@ -45,7 +47,7 @@ services:
         volumes:
           - web-data:/var/www/html
         ports:
-          - 8080:8080
+          - 1234:1234
         networks:
           - inception
         restart: on-failure
@@ -69,20 +71,33 @@ services:
         networks:
           - inception
         restart: on-failure
-    ftp:
-        build: ./requirements/bonus/ftp
-        image: ftp
-        container_name: ftp
-        volumes:
-          - wp_data:/home/$ftpuser/empty
-        depends_on:
-          - wordpress
-        ports:
-          - 20-21:20-21
-          - 40000-41000:40000-41000
-        networks:
-          - inception
-        restart: on-failure
+    # ftp:
+    #     build: ./requirements/bonus/ftp
+    #     image: ftp
+    #     container_name: ftp
+    #     env_file: .env
+    #     volumes:
+    #       - wp_data:/home/$ftpuser/empty
+    #     ports:
+    #       - 20-21:20-21
+    #       - 40000-41000:40000-41000
+    #     networks:
+    #       - inception
+    #     restart: on-failure
+    # cadvisor:
+    #     build: ./requirements/bonus/cadvisor
+    #     image: cadvisor
+    #     container_name: cadvisor
+    #     volumes:
+    #       - /:/rootfs:ro
+    #       - /var/run:/var/run:ro 
+    #       - /sys:/sys:ro 
+    #       - /var/lib/docker/:/var/lib/docker:ro
+    #     ports:
+    #       - 8080:8080
+    #     networks:
+    #       - inception
+    #     restart: on-failure
 
 volumes:
     mdb_data:
@@ -90,19 +105,19 @@ volumes:
       driver_opts:
         type: none
         o: bind
-        device: /Users/ilahyani/data/mariadb
+        device: /Users/ilahyani/inception/srcs/volumes/mariadb
     wp_data:
       driver: local
       driver_opts:
         type: none
         o: bind
-        device: /Users/ilahyani/data/wordpress
+        device: /Users/ilahyani/inception/srcs/volumes/wordpress
     web-data:
       driver: local
       driver_opts:
         type: none
         o: bind
-        device: $(pwd)/requirements/bonus/website/webfiles
+        device: /Users/ilahyani/inception/srcs/requirements/bonus/website/webfiles
 
 networks:
     inception:
