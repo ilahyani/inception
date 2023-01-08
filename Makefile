@@ -20,4 +20,4 @@ fclean: clean
 	@docker volume prune -f
 	@docker system prune -af
 
-re: fclean all
+re: clean all
