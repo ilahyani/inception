@@ -69,6 +69,20 @@ services:
         networks:
           - inception
         restart: on-failure
+    ftp:
+        build: ./requirements/bonus/ftp
+        image: ftp
+        container_name: ftp
+        volumes:
+          - wp_data:/home/$ftpuser/empty
+        depends_on:
+          - wordpress
+        ports:
+          - 20-21:20-21
+          - 40000-41000:40000-41000
+        networks:
+          - inception
+        restart: on-failure
 
 volumes:
     mdb_data:
@@ -88,7 +102,7 @@ volumes:
       driver_opts:
         type: none
         o: bind
-        device: /Users/ilahyani/inception/srcs/requirements/bonus/website/webfiles
+        device: $(pwd)/requirements/bonus/website/webfiles
 
 networks:
     inception:
