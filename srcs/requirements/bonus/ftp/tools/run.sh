@@ -1,10 +1,5 @@
 #!/bin/bash
 
-export ftpuser=smail
-export ftppasswd=smail123
-
-# service vsftpd start 
-
 useradd $ftpuser
 
 echo -e "$ftppasswd\n$ftppasswd" | passwd $ftpuser
@@ -40,8 +35,6 @@ userlist_deny=NO
 rsa_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
 rsa_private_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
 ssl_enable=NO" > /etc/vsftpd.conf
-
-
 
 service vsftpd start
 
