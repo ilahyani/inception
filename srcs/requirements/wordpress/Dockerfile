@@ -1,6 +1,6 @@
 FROM debian:buster
 
-RUN apt-get update && apt-get upgrade  \
+RUN apt-get update && apt-get upgrade -y \
     && apt-get install php-fpm php-mysql -y \
     && apt-get install curl -y
 
