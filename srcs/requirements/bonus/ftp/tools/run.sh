@@ -10,11 +10,11 @@ mkdir -p /home/$ftpuser/empty
 
 chown -R $ftpuser:$ftpuser /home/$ftpuser
 
-chmod -w /home/$ftpuser/empty
+chmod 755 /home/$ftpuser/empty
 
 echo "listen=YES
 listen_ipv6=NO
-anonymous_enable=NO
+anonymous_enable=YES
 local_enable=YES
 write_enable=YES
 dirmessage_enable=YES
@@ -22,7 +22,7 @@ use_localtime=YES
 xferlog_enable=YES
 connect_from_port_20=YES
 chroot_local_user=YES
-secure_chroot_dir=/home/$ftpuser/empty
+secure_chroot_dir=/home/$ftpuser
 allow_writeable_chroot=YES
 pam_service_name=vsftpd
 user_sub_token=$ftpuser
