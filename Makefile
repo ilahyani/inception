@@ -7,7 +7,6 @@ down:
 	@docker-compose -f ./srcs/docker-compose.yml down
 
 clean: down
-	@docker ps -aq | xargs docker rm -f
 	@docker images -q | xargs docker rmi
 	@docker volume ls -q | xargs docker volume rm
 	@echo y | rm -rf /Users/ilahyani/data/wordpress/*
