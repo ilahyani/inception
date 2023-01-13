@@ -8,10 +8,10 @@ down:
 
 clean: down
 	@docker ps -aq | xargs docker rm -f
-	@docker images -aq | xargs docker rmi
+	@docker images -q | xargs docker rmi
 	@docker volume ls -q | xargs docker volume rm
-	@echo y | rm -rf /Users/ilahyani/inception/srcs/volumes/wordpress/*
-	@echo y | rm -rf /Users/ilahyani/inception/srcs/volumes/mariadb/*
+	@echo y | rm -rf /Users/ilahyani/data/wordpress/*
+	@echo y | rm -rf /Users/ilahyani/data/mariadb/*
 
 re: clean all
 
