@@ -1,20 +1,21 @@
 #!/bin/bash
 
+service vsftpd start
+
 useradd $ftpuser
-
 echo -e "$ftppasswd\n$ftppasswd" | passwd $ftpuser
+echo $ftpuser > /etc/vsftpd.userlist
 
-echo $ftpuser > /etc/vsftpd.user_list
+mkdir /home/$ftpuser/ftp
+chown nobody:nogroup /home/$ftpuser/ftp
+chmod a-w /home/$ftpuser/ftp
 
-mkdir -p /home/$ftpuser/empty
+mkdir /home/$ftpuser/ftp/files
+chown $ftpuser:$ftpuser /home/$ftpuser/ftp/files
 
-chown -R $ftpuser:$ftpuser /home/$ftpuser
-
-chmod 755 /home/$ftpuser/empty
-
-echo "listen=YES
-listen_ipv6=NO
-anonymous_enable=YES
+echo "listen=NO
+listen_ipv6=YES
+anonymous_enable=NO
 local_enable=YES
 write_enable=YES
 dirmessage_enable=YES
@@ -22,20 +23,19 @@ use_localtime=YES
 xferlog_enable=YES
 connect_from_port_20=YES
 chroot_local_user=YES
-secure_chroot_dir=/home/$ftpuser
-allow_writeable_chroot=YES
+chroot_local_user=YES
+secure_chroot_dir=/var/run/vsftpd/empty
 pam_service_name=vsftpd
-user_sub_token=$ftpuser
-pasv_enable=YES
-pasv_min_port=40000
-pasv_max_port=41000
-userlist_enable=YES
-userlist_file=/etc/vsftpd.user_list
-userlist_deny=NO
 rsa_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
 rsa_private_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
-ssl_enable=NO" > /etc/vsftpd.conf
+ssl_enable=NO
+local_enable=YES
+allow_writeable_chroot=YES
+pasv_enable=YES
+local_root=/home/$ftpuser/ftp
+pasv_min_port=40000
+pasv_max_port=40005
+userlist_file=/etc/vsftpd.userlist" > /etc/vsftpd.conf
 
-service vsftpd start
-
-tail -f
+service vsftpd stop
+vsftpd
