@@ -6,12 +6,16 @@ useradd $ftpuser
 echo -e "$ftppasswd\n$ftppasswd" | passwd $ftpuser
 echo $ftpuser > /etc/vsftpd.userlist
 
+groupadd www-pub
+usermod -aG www-pub $ftpuser
+
 mkdir /home/$ftpuser/ftp
 chown nobody:nogroup /home/$ftpuser/ftp
+chmod 2775 /home/$ftpuser/ftp
 chmod a-w /home/$ftpuser/ftp
 
 mkdir /home/$ftpuser/ftp/files
-chown $ftpuser:$ftpuser /home/$ftpuser/ftp/files
+chown $ftpuser:www-pub /home/$ftpuser/ftp/files
 
 echo "listen=NO
 listen_ipv6=YES
