@@ -1,9 +1,5 @@
 #! /bin/bash
 
-groupadd www-pub
-
-usermod -aG www-pub www-data
-
 sed -i 's/listen = \/run\/php\/php7.3-fpm.sock/listen = 9000/g' /etc/php/7.3/fpm/pool.d/www.conf
 
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
@@ -13,6 +9,14 @@ mv wp-cli.phar /usr/local/bin/wp
 chmod +x /usr/local/bin/wp
 
 mkdir -p var/www/html
+
+groupadd www-pub
+
+usermod -aG www-pub www-data
+
+chown -R www-data:www-pub /var/www
+
+chmod 2775 /var/www
 
 runuser -u www-data -- wp core download --path=/var/www/html
 
@@ -32,10 +36,6 @@ runuser -u www-data -- wp config set WP_REDIS_HOST redis --path=/var/www/html
 runuser -u www-data -- wp config set WP_REDIS_PORT 6379 --path=/var/www/html
 
 runuser -u www-data -- wp redis enable --path=/var/www/html
-
-chown -R www-data:www-pub /var/www
-
-chmod 2775 /var/www
 
 mkdir /run/php
 
