@@ -9,8 +9,8 @@ down:
 clean: down
 	@docker images -q | xargs docker rmi
 	@docker volume ls -q | xargs docker volume rm
-	@echo y | rm -rf /Users/ilahyani/data/wordpress/*
-	@echo y | rm -rf /Users/ilahyani/data/mariadb/*
+	@echo y | rm -rf $HOME//data/wordpress/*
+	@echo y | rm -rf $HOME//data/mariadb/*
 
 re: clean all
 
