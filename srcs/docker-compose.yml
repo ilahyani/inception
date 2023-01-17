@@ -21,7 +21,6 @@ services:
         env_file: .env
         depends_on:
           - mariadb
-          - ftp
           - redis
         networks:
           - inception
@@ -118,7 +117,7 @@ volumes:
       driver_opts:
         type: none
         o: bind
-        device: $PWD/srcs/requirements/bonus/website/webfiles
+        device: $HOME/inception/srcs/requirements/bonus/website/webfiles
 
 networks:
     inception:
