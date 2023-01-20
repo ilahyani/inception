@@ -9,13 +9,9 @@ echo $ftpuser > /etc/vsftpd.userlist
 groupadd www-pub
 usermod -aG www-pub $ftpuser
 
-mkdir /home/$ftpuser/ftp
-chown nobody:nogroup /home/$ftpuser/ftp
-chmod 2775 /home/$ftpuser/ftp
-chmod a-w /home/$ftpuser/ftp
-
-mkdir /home/$ftpuser/ftp/files
-chown $ftpuser:www-pub /home/$ftpuser/ftp/files
+mkdir -p /home/$ftpuser/ftp
+chown $ftpuser:www-pub /home/$ftpuser/ftp
+chmod 2755 /home/$ftpuser/ftp
 
 echo "listen=NO
 listen_ipv6=YES
@@ -42,4 +38,5 @@ pasv_max_port=40005
 userlist_file=/etc/vsftpd.userlist" > /etc/vsftpd.conf
 
 service vsftpd stop
+
 vsftpd

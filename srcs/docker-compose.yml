@@ -77,7 +77,7 @@ services:
         container_name: ftp
         env_file: .env
         volumes:
-          - wp_data:/home/smail/ftp/files
+          - wp_data:/home/smail/ftp
         ports:
           - 20-21:20-21
           - 40000-40005:40000-40005

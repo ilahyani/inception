@@ -16,7 +16,7 @@ usermod -aG www-pub www-data
 
 chown -R www-data:www-pub /var/www
 
-chmod 2775 /var/www
+chmod 2755 /var/www
 
 runuser -u www-data -- wp core download --path=/var/www/html
 
