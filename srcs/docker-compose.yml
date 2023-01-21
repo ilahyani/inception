@@ -1,4 +1,5 @@
-version: "3"
+version: "3.6"
+
 services:
     mariadb:
         build: ./requirements/mariadb
@@ -33,12 +34,12 @@ services:
         container_name: nginx
         volumes:
           - wp_data:/var/www/html
+        depends_on:
+          - wordpress
         ports:
           - 443:443
         networks:
           - inception
-        depends_on:
-          - wordpress
         restart: on-failure
     website:
         build: ./requirements/bonus/website
@@ -117,9 +118,8 @@ volumes:
       driver_opts:
         type: none
         o: bind
-        device: $HOME/inception/srcs/requirements/bonus/website/webfiles
+        device: $HOME/42inception/srcs/requirements/bonus/website/webfiles
 
 networks:
     inception:
-      # name: inception
       driver: bridge
