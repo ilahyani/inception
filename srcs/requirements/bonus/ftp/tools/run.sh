@@ -4,14 +4,13 @@ service vsftpd start
 
 useradd $ftpuser
 echo -e "$ftppasswd\n$ftppasswd" | passwd $ftpuser
-echo $ftpuser > /etc/vsftpd.userlist
-
 groupadd www-pub
 usermod -aG www-pub $ftpuser
+echo $ftpuser > /etc/vsftpd.userlist
 
 mkdir -p /home/$ftpuser/ftp
-chown $ftpuser:www-pub /home/$ftpuser/ftp
-chmod 2755 /home/$ftpuser/ftp
+chown -R $ftpuser:www-pub /home/$ftpuser/ftp
+chmod 2775 /home/$ftpuser/ftp
 
 echo "listen=NO
 listen_ipv6=YES
