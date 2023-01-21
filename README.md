@@ -19,8 +19,6 @@ https://medium.com/@saschagrunert/demystifying-containers-part-ii-container-runt
 
 https://medium.com/@saschagrunert/demystifying-containers-part-iii-container-images-244865de6fef
 
-Understand Namespaces: http://ifeanyi.co/
-
 Docker networking: https://www.youtube.com/watch?v=bKFMS5C4CG0&start=935
 ### Getting started
 
